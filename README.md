@@ -4,10 +4,11 @@ This project is for collection latitude/longitude for specific location based on
 ## How to run
 ```
 1. Download getgeoinfo scripts using git client (git clone) or Web browser
-2. python3 getgeoinfo.py -a 'address'
-usage: getgeoinfo.py [-h] [-a ADDRESS] [-t TIMEOUT] [-s]
+❯ python3 getgeoinfo.py -h
+usage: getgeoinfo.py [-h] [-a ADDRESS] [-t TIMEOUT] [-s] [-b BULK_FILE]
 
 python3 getgeoinfo.py -i address
+
 optional arguments:
   -h, --help            show this help message and exit
   -a ADDRESS, --address ADDRESS
@@ -16,4 +17,6 @@ optional arguments:
                         setting TIMEOUT value
   -s, --ssl_verify_flag
                         setting ssl verify flag
+  -b BULK_FILE, --bulk_file BULK_FILE
+                        processing csv file
 ```
