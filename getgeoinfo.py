@@ -4,7 +4,10 @@ import geopy
 import argparse
 import pandas as pd
 from geopy.geocoders import Nominatim
+from geopy.geocoders import GoogleV3
 
+GOOGLE_APIKEY = ""
+MAPS = ['osm', 'googlemap']
 class Getgeoinfo():
     """
     This Getgeoinfo class contains getting latitude/longitude
@@ -37,11 +40,18 @@ class Getgeoinfo():
                       'AppleWebKit/537.36 (KHTML, like Gecko) ' \
                       'Chrome/71.0.3578.98 Safari/537.36'
 
-        _n = Nominatim(user_agent=_user_agent, timeout=self.timeout)
 
+        if self.map == 'osm':
+            _m = Nominatim(user_agent=_user_agent, timeout=self.timeout)
+        elif self.map == 'googlemap':
+            if not GOOGLE_APIKEY:
+                print('[*] Google API KEY has to be speicfy in code')
+                return False
+            _m = GoogleV3(api_key=GOOGLE_APIKEY)
+        
         if self.address:
             try:
-                _x = _n.geocode(self.address)
+                _x = _m.geocode(self.address)
             except Exception as e:
                 print(str(e))
                 return None
@@ -55,12 +65,12 @@ class Getgeoinfo():
         elif self.bulk_file:
             try:
                 _df = pd.read_csv(self.bulk_file)
-                _df['osm_addr'] = _df['Address'].apply(_n.geocode)
+                _df[self.map+'_addr'] = _df['Address'].apply(_m.geocode)
 
-                _df['latitude'] = _df['osm_addr'].apply(lambda x: x.latitude
+                _df[self.map+'_latitude'] = _df[self.map+'_addr'].apply(lambda x: x.latitude
                                      if x else None) 
 
-                _df['longitude'] = _df['osm_addr'].apply(lambda x: x.longitude
+                _df[self.map+'_longitude'] = _df[self.map+'_addr'].apply(lambda x: x.longitude
                                      if x else None) 
 
                 _df.to_csv(self.bulk_file,
@@ -80,10 +90,19 @@ class Getgeoinfo():
                                 required=False, help='setting TIMEOUT value')
         arg_parse.add_argument('-s', '--ssl_verify_flag', default=False, action='store_true',
                                 required=False, help='setting ssl verify flag')
+        arg_parse.add_argument('-m', '--map', type=str, action='store',
+                                required=True, help='specify one map out of maps(osm, google)')
         arg_parse.add_argument('-b', '--bulk_file', default=False, action='store',
                                 required=False, help='processing csv file')
+
         self.args = arg_parse.parse_args()
         self.args = arg_parse.parse_args()
+
+        self.map = self.args.map.lower()
+
+        if not self.map in MAPS:
+            print('This {} map doesn\'t support'.format(self.map))
+            return False
 
 if __name__ == "__main__":
     o_geo = Getgeoinfo()
