@@ -1,5 +1,5 @@
-No,Address
-1,상동 길주로
-2,하남 덕풍공원로
-3,송파 잠실7동
-4,벌교 원동안길
+No,Address,googlemap_addr,googlemap_latitude,googlemap_longitude
+1,상동 길주로,"Gilju-ro, Wonmi-gu, Bucheon-si, Gyeonggi-do, South Korea",37.504939,126.7859443
+2,하남 덕풍공원로,"Deokpunggongwon-ro, Deokpung-dong, Hanam-si, Gyeonggi-do, South Korea",37.53907,127.1991664
+3,송파 잠실7동,"Jamsil-dong, Songpa-gu, Seoul, South Korea",37.51289879999999,127.0829932
+4,벌교 원동안길,"Wondongan-gil, Beolgyo-eup, Boseong-gun, Jeollanam-do, South Korea",34.8404036,127.336674

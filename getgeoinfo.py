@@ -83,7 +83,9 @@ class Getgeoinfo():
                 return None
     
     def pasrge_argument(self):
-        arg_parse = argparse.ArgumentParser(description='python3 getgeoinfo.py -i address')
+        arg_parse = argparse.ArgumentParser(description='python3 getgeoinfo.py'
+                                            ' -m "osm|googlemap"' 
+                                            ' [ -a "address" | -b file]')
         arg_parse.add_argument('-a', '--address', type=str, action='store',
                                 required=False, help='input address to be search')
         arg_parse.add_argument('-t', '--timeout', type=int, default=10, 
@@ -91,7 +93,7 @@ class Getgeoinfo():
         arg_parse.add_argument('-s', '--ssl_verify_flag', default=False, action='store_true',
                                 required=False, help='setting ssl verify flag')
         arg_parse.add_argument('-m', '--map', type=str, action='store',
-                                required=True, help='specify one map out of maps(osm, google)')
+                                required=True, help='specify one map out of both(osm, googlemap)')
         arg_parse.add_argument('-b', '--bulk_file', default=False, action='store',
                                 required=False, help='processing csv file')
 
