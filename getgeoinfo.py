@@ -55,12 +55,13 @@ class Getgeoinfo():
         elif self.bulk_file:
             try:
                 _df = pd.read_csv(self.bulk_file)
-                _df['location'] = _df['Address'].apply(_n.geocode)
+                _df['osm_addr'] = _df['Address'].apply(_n.geocode)
 
-                _df['latitude'] = _df['location'].apply(lambda loc: 
-                                  loc.latitude if loc.latitude else None) 
-                _df['longitude'] = _df['location'].apply(lambda loc:
-                                   loc.longitude if loc.longitude else None) 
+                _df['latitude'] = _df['osm_addr'].apply(lambda x: x.latitude
+                                     if x else None) 
+
+                _df['longitude'] = _df['osm_addr'].apply(lambda x: x.longitude
+                                     if x else None) 
 
                 _df.to_csv(self.bulk_file,
                             sep=',', 
