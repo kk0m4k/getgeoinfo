@@ -3,7 +3,7 @@ This project is for collection latitude/longitude for specific location based on
 
 ## How to run
 ```
-1. Download getgeoinfo scripts using git client (git clone) or Web browser
+1. Download getgeoinfo scripts using git client (git clone) or Web browser using OSM or GoogleMAP
 ❯ python3 getgeoinfo.py -h
 usage: getgeoinfo.py [-h] [-a ADDRESS] [-t TIMEOUT] [-s] -m MAP [-b BULK_FILE]
 
@@ -20,7 +20,24 @@ optional arguments:
   -m MAP, --map MAP     specify one map out of both(osm, googlemap)
   -b BULK_FILE, --bulk_file BULK_FILE
                         processing csv file
+ 
+ 
+2. Download getgeoinfo scripts using git client (git clone) or Web browser using NaverMAP
+❯ python3 geonavermap.py -h                                                                                                                           
+usage: geonavermap.py [-h] [-a ADDRESS] [-t TIMEOUT] [-s] [-b BULK_FILE]
 
+python3 getgeoinfo.py [ -a "address" | -b file]
+
+optional arguments:
+  -h, --help            show this help message and exit
+  -a ADDRESS, --address ADDRESS
+                        input address to be search
+  -t TIMEOUT, --timeout TIMEOUT
+                        setting TIMEOUT value
+  -s, --ssl_verify_flag
+                        setting ssl verify flag
+  -b BULK_FILE, --bulk_file BULK_FILE
+                        processing csv file
 ```
 
 ## Sample
