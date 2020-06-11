@@ -11,7 +11,7 @@ NAVERMAP_SECRETKEY=""
 class GeoNavermap():
     """
     This Getgeoinfo class contains getting latitude/longitude
-    of specific addres from OSM(OpenStreetMap)
+    of specific addres from NaverMAP
     """
 
     def __init__(self, address=None, timeout=None, ssl_verify_flag=False):
