@@ -44,6 +44,10 @@ class GeoNavermap():
 
         r = requests.get(navermapv2_uri, headers=headers, params=x_param, verify=self.ssl_verify_flag)
         result = r.json()
+
+        if 'status' not in result and 'error' in result:
+            print(result['error'])
+            return None
         
         if result['meta']['count']:
             x_result['navermap_addr'] = result['addresses'][0]['roadAddress']
@@ -128,6 +132,10 @@ if __name__ == "__main__":
         exit(0)
 
     if not o_geo.bulk_file:
+        """
+        print(geo_result['address'].decode('utf-8'),
+              geo_result['lat'], geo_result['long'])
+              """
         print(geo_result)
     else:
         print(geo_result)
