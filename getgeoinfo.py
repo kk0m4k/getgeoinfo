@@ -11,7 +11,7 @@ MAPS = ['osm', 'googlemap']
 class Getgeoinfo():
     """
     This Getgeoinfo class contains getting latitude/longitude
-    of specific addres from OSM(OpenStreetMap)
+    of specific addres from OSM(OpenStreetMap) or GoogleMAP
     """
 
     def __init__(self, address=None, timeout=None, ssl_verify_flag=False):
