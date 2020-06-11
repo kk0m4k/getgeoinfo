@@ -35,20 +35,21 @@ class GeoNavermap():
         x_param = {'query': address} 
 
         navermapv2_uri = "https://naveropenapi.apigw.ntruss.com/map-geocode/v2/geocode"
+
         headers = {
             'User-Agent': self.user_agent,
             'X-NCP-APIGW-API-KEY-ID': NAVERMAP_CLIENTID,
             'X-NCP-APIGW-API-KEY': NAVERMAP_SECRETKEY
         }
 
-        r = requests.get(navermapv2_uri, headers=headers, params=x_param, verify=False)
+        r = requests.get(navermapv2_uri, headers=headers, params=x_param, verify=self.ssl_verify_flag)
         result = r.json()
         
         if result['meta']['count']:
             x_result['navermap_addr'] = result['addresses'][0]['roadAddress']
             x_result['navermap_addr_en'] = result['addresses'][0]['englishAddress']
             x_result['navermap_longitude'] = result['addresses'][0]['x'] 
-            x_result['navermap_latitude'] = result['addresses'][0]['x']
+            x_result['navermap_latitude'] = result['addresses'][0]['y']
         else:
             x_result['navermap_addr'] = None
             x_result['navermap_addr_en'] = None
@@ -104,7 +105,6 @@ class GeoNavermap():
     
     def pasrge_argument(self):
         arg_parse = argparse.ArgumentParser(description='python3 getgeoinfo.py'
-                                            ' -m "osm|googlemap"' 
                                             ' [ -a "address" | -b file]')
         arg_parse.add_argument('-a', '--address', type=str, action='store',
                                 required=False, help='input address to be search')
@@ -128,10 +128,6 @@ if __name__ == "__main__":
         exit(0)
 
     if not o_geo.bulk_file:
-        """
-        print(geo_result['address'].decode('utf-8'),
-              geo_result['lat'], geo_result['long'])
-              """
         print(geo_result)
     else:
         print(geo_result)
