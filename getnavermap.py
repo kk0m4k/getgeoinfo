@@ -108,7 +108,7 @@ class GeoNavermap():
                 return None
     
     def pasrge_argument(self):
-        arg_parse = argparse.ArgumentParser(description='python3 getgeoinfo.py'
+        arg_parse = argparse.ArgumentParser(description='python3 getnavermap.py'
                                             ' [ -a "address" | -b file]')
         arg_parse.add_argument('-a', '--address', type=str, action='store',
                                 required=False, help='input address to be search')
